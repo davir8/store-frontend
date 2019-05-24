@@ -1,30 +1,28 @@
 import React from 'react';
 import { func, shape } from 'prop-types';
 
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { Container } from './styles';
+import { isLogaded, logout, getUser } from '../../helpers/auth';
 
-const authToken = localStorage.getItem(process.env.AUTH_ID_TOKEN);
+import { Container } from './styles';
 
 const Header = props => (
   <Container>
-    React JS
-    {authToken ? (
+    <span>{isLogaded() ? getUser().name : ''}</span>
+    <span>React JS</span>
+    {isLogaded() ? (
       <button
         type="button"
-        className="ml1 pointer black"
+        className="logout"
         onClick={() => {
-          localStorage.removeItem(process.env.AUTH_ID_TOKEN);
+          logout();
           props.history.push('/');
         }}
       >
-        logout
+        Sair
       </button>
     ) : (
-      <Link to="/login" className="ml1 no-underline black">
-        login
-      </Link>
+      <span />
     )}
   </Container>
 );

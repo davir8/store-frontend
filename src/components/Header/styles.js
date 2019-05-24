@@ -8,6 +8,22 @@ export const Container = styled.header`
   font-size: 18px;
   font-weight: bold;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 10px;
+
+  button {
+    border: none;
+    border-radius: 2px;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+
+    &:hover {
+      cursor: pointer;
+      color: #c1c1c1;
+    }
+  }
 `;
