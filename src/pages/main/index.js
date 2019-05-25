@@ -1,50 +1,71 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Query } from 'react-apollo';
-
 import { GET_PRODUCTS } from '../../services/queries/product';
 
-import { Container } from './styles';
 import Header from '../../components/Header';
+import { Container } from './styles';
 
 export default class Main extends Component {
   state = {
-    // products: [],
-    // productInfo: {},
-    // page: 1,
+    hasMore: true,
   };
 
-  // prevPage = () => {
-  //   const { page } = this.state;
-  //   if (page === 1) return;
+  handleScroll = (e, fetchMore, data) => {
+    e.preventDefault();
 
-  //   const pageNumber = page - 1;
-  //   this.loadProducts(pageNumber);
-  // };
+    if (data.page >= data.pages) {
+      this.setState({ hasMore: false });
+      return;
+    }
 
-  // nextPage = () => {
-  //   const { page, productInfo } = this.state;
-  //   if (page === productInfo.pages) return;
+    if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
+      fetchMore({
+        variables: {
+          limit: 4,
+          page: data.page + 1,
+        },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
 
-  //   const pageNumber = page + 1;
-  //   this.loadProducts(pageNumber);
-  // };
+          return {
+            products: {
+              ...prev.products,
+              docs: [...prev.products.docs, ...fetchMoreResult.products.docs],
+              page: fetchMoreResult.products.page,
+            },
+          };
+        },
+      });
+    }
+  };
 
   render() {
-    // const { page, productInfo } = this.state;
+    const { hasMore } = this.state;
     return (
       <>
         <Header />
         <Container>
-          <Query query={GET_PRODUCTS}>
-            {({ loading, error, data }) => {
+          <Query
+            query={GET_PRODUCTS}
+            variables={{
+              limit: 4,
+              page: 1,
+            }}
+            fetchPolicy="cache-and-network"
+          >
+            {({
+              loading, error, data, fetchMore,
+            }) => {
               if (loading) return <p>Carregando...</p>;
 
               if (error) return <p>Error!</p>;
 
               return (
-                <>
+                <div
+                  style={{ height: '400px', overflow: 'auto' }}
+                  onScroll={e => this.handleScroll(e, fetchMore, data.products)}
+                >
                   {data.products.docs.map(product => (
                     <article key={product.id}>
                       <strong>{product.name}</strong>
@@ -52,7 +73,8 @@ export default class Main extends Component {
                       <Link to={`/products/${product.id}`}>Acessar</Link>
                     </article>
                   ))}
-                </>
+                  {!hasMore && <div>Você chegou ao fim dos resultados!</div> }
+                </div>
               );
             }}
           </Query>

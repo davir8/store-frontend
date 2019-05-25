@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
+  height: 400px;
   max-width: 600px;
   margin: 20px auto 0;
   padding: 0 20px;

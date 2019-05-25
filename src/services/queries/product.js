@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_PRODUCTS = gql`
-  query getProducts($filter: String) {
-    products(filter: $filter) {
+  query getProducts($filter: String, $limit: Int, $page: Int) {
+    products(filter: $filter, limit: $limit, page: $page) {
       page
       pages
       limit
