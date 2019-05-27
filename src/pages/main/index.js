@@ -46,6 +46,9 @@ export default class Main extends Component {
       <>
         <Header />
         <Container>
+          <div className="add-product">
+            <Link to="/products/create">Adicionar produto</Link>
+          </div>
           <Query
             query={GET_PRODUCTS}
             variables={{
@@ -62,19 +65,22 @@ export default class Main extends Component {
               if (error) return <p>Error!</p>;
 
               return (
-                <div
-                  style={{ height: '400px', overflow: 'auto' }}
-                  onScroll={e => this.handleScroll(e, fetchMore, data.products)}
-                >
-                  {data.products.docs.map(product => (
-                    <article key={product.id}>
-                      <strong>{product.name}</strong>
-                      <p>{product.description}</p>
-                      <Link to={`/products/${product.id}`}>Acessar</Link>
-                    </article>
-                  ))}
-                  {!hasMore && <div>Você chegou ao fim dos resultados!</div> }
-                </div>
+                <>
+                  <div
+                    className="list-products"
+                    onScroll={e => this.handleScroll(e, fetchMore, data.products)}
+                  >
+                    {data.products.docs.map(product => (
+                      <article key={product.id}>
+                        <strong>{product.name}</strong>
+                        <p>{product.description}</p>
+                        <Link to={`/products/${product.id}`}>Acessar</Link>
+                      </article>
+                    ))}
+                    {!hasMore && <div>Você chegou ao fim dos resultados!</div>}
+                  </div>
+                  <span>Total: {data.products.docs.length}</span>
+                </>
               );
             }}
           </Query>

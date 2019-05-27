@@ -2,11 +2,30 @@ import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
-  height: 400px;
+  height: 600px;
   max-width: 600px;
   margin: 20px auto 0;
   padding: 0 20px;
 
+  .add-product {
+    margin-bottom: 20px;
+    a {
+      color: #04966a;
+      font-size: 16px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  .list-products {
+    height: 80%;
+    overflow: auto;
+    margin-bottom: 20px;
+  }
   article {
     background: #fff;
     border: 1px solid #ddd;

@@ -10,7 +10,7 @@ import 'moment/locale/pt-br';
 import { Container } from './styles';
 import Header from '../../components/Header';
 
-export default class Product extends Component {
+export default class ProductDetail extends Component {
   static propTypes = {
     match: shape({
       params: shape({
