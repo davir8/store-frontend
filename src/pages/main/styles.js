@@ -7,17 +7,34 @@ export const Container = styled.div`
   margin: 20px auto 0;
   padding: 0 20px;
 
-  .add-product {
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
+
     a {
       color: #04966a;
       font-size: 16px;
       text-decoration: none;
       font-weight: bold;
+      &:hover {
+        opacity: 0.5;
+      }
     }
 
-    &:hover {
-      opacity: 0.5;
+    input {
+      height: 40px;
+      padding: 0 15px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #444;
+
+      &:focus {
+        border-color: #79ceb5;
+      }
     }
   }
 

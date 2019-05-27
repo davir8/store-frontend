@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { func, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { Mutation } from 'react-apollo';
@@ -11,6 +12,12 @@ import { Container } from './styles';
 import Header from '../../components/Header';
 
 export default class ProductCreate extends Component {
+  static propTypes = {
+    history: shape({
+      push: func,
+    }).isRequired,
+  };
+
   state = {
     name: '',
     description: '',
@@ -47,7 +54,7 @@ export default class ProductCreate extends Component {
             query: GET_PRODUCTS,
           });
 
-          data.users.push(createProduct);
+          data.products.docs.unshift(createProduct);
 
           proxy.writeQuery({
             query: GET_PRODUCTS,
@@ -109,7 +116,7 @@ export default class ProductCreate extends Component {
                 />
               </label>
               <label htmlFor="description">
-                Nome
+                Descrição
                 <textarea
                   rows="3"
                   name="description"
