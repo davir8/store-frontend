@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, node } from 'prop-types';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -9,20 +10,28 @@ import Login from './pages/login/index';
 
 import { isAuthenticated } from './services/auth';
 
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (isAuthenticated() ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+    ))
+    }
+  />
+);
+PrivateRoute.propTypes = {
+  component: node.isRequired,
+  location: string.isRequired,
+};
+
 const Routes = () => (
   <Switch>
-    <Route exact path="/" render={() => (isAuthenticated() ? <Main /> : <Redirect to="/login" />)} />
-    <Route exact path="/login" render={() => (isAuthenticated() ? <Redirect to="/" /> : <Login />)} />
-    <Route
-      exact
-      path="/products/create"
-      render={props => (isAuthenticated() ? <ProductCreate {...props} /> : <Redirect to="/login" />)}
-    />
-    <Route
-      exact
-      path="/products/:id"
-      render={props => (isAuthenticated() ? <ProductDetail {...props} /> : <Redirect to="/login" />)}
-    />
+    <PrivateRoute exact path="/" component={Main} />
+    <Route path="/login" render={() => (isAuthenticated() ? <Redirect to="/" /> : <Login />)} />
+    <PrivateRoute path="/products/create" component={ProductCreate} />
+    <PrivateRoute path="/products/:id" component={ProductDetail} />
     <Route path="*" render={() => <h1>Página não encontrada! :(</h1>} />
   </Switch>
 );
