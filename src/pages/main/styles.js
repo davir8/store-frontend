@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
-export const Container = styled.div`
-  height: 600px;
+export const Container = styled.main`
+  height: -moz-calc(100% - 80px);
+  height: -webkit-calc(100% - 80px);
+  height: calc(100% - 80px);
   max-width: 600px;
   margin: 20px auto 0;
   padding: 0 20px;

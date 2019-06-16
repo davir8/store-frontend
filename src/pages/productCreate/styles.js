@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
-export const Container = styled.div`
+export const Container = styled.main`
   max-width: 600px;
   margin: 20px auto 0;
   padding: 20px;
@@ -23,27 +23,11 @@ export const Container = styled.div`
         opacity: 0.5;
       }
     }
-    h1 {
+
+    h2 {
       font-size: 32px;
       color: #333;
     }
-  }
-
-  span.date {
-    color: #04966a;
-    line-height: 24px;
-    font-size: 16px;
-    margin-top: 5px;
-  }
-  p {
-    color: #666;
-    line-height: 24px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-  }
-
-  p a {
-    color: #069;
   }
 
   .input-group {

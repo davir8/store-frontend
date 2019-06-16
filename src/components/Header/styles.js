@@ -12,6 +12,10 @@ export const Container = styled.header`
   align-items: center;
   padding: 0 10px;
 
+  h1 {
+    font-size: 18px;
+  }
+
   button {
     border: none;
     border-radius: 2px;

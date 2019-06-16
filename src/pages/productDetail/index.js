@@ -23,27 +23,27 @@ const ProductDetail = ({ match }) => {
             if (error) return <p>Error!</p>;
 
             return (
-              <>
-                <div className="header">
+              <article>
+                <header>
                   <Link to="/" className="back">
                     <i className="fa fa-arrow-left" />
                   </Link>
-                  <h1>{data.product.name}</h1>
-                </div>
-                <span className="date">Cadastrado {moment(data.product.createdAt).fromNow()}</span>
+                  <h2>{data.product.name}</h2>
+                </header>
+                <time>Cadastrado {moment(data.product.createdAt).fromNow()}</time>
                 <p>{data.product.description}</p>
                 <div className="info-owner">
                   <strong>Informações do proprietário</strong>
                   <span>Nome: {data.product.owner.name}</span>
                   <span>Email: {data.product.owner.email}</span>
                 </div>
-                <p>
+                <footer>
                   <span>Mais informações em: </span>
                   <Link to={`${data.product.url}`} target="_blank" rel="noopener noreferrer">
                     {data.product.url}
                   </Link>
-                </p>
-              </>
+                </footer>
+              </article>
             );
           }}
         </Query>

@@ -9,7 +9,7 @@ import { Container } from './styles';
 const Header = props => (
   <Container>
     <span>{isAuthenticated() ? getUser().name : ''}</span>
-    <span>React JS</span>
+    <h1>React JS</h1>
     {isAuthenticated() ? (
       <button
         type="button"

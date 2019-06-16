@@ -99,7 +99,7 @@ export default class ProductCreate extends Component {
               <Link to="/" className="back">
                 <i className="fa fa-arrow-left" />
               </Link>
-              <h1>Cadastrar novo produto</h1>
+              <h2>Cadastrar novo produto</h2>
             </div>
             {!!error && <span className="error">{error}</span>}
             {loading && <span>Carregando...</span>}
