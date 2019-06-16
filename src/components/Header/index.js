@@ -2,15 +2,15 @@ import React from 'react';
 import { func, shape } from 'prop-types';
 
 import { withRouter } from 'react-router';
-import { isLogaded, logout, getUser } from '../../helpers/auth';
+import { isAuthenticated, logout, getUser } from '../../services/auth';
 
 import { Container } from './styles';
 
 const Header = props => (
   <Container>
-    <span>{isLogaded() ? getUser().name : ''}</span>
+    <span>{isAuthenticated() ? getUser().name : ''}</span>
     <span>React JS</span>
-    {isLogaded() ? (
+    {isAuthenticated() ? (
       <button
         type="button"
         className="logout"

@@ -3,7 +3,7 @@ import { setContext } from 'apollo-link-context';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import { isLogaded, getToken } from '../helpers/auth';
+import { isAuthenticated, getToken } from './auth';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',
@@ -12,7 +12,7 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
-    authorization: isLogaded() ? `Bearer ${getToken()}` : '',
+    Authorization: isAuthenticated() ? `Bearer ${getToken()}` : '',
   },
 }));
 

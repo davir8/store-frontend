@@ -3,8 +3,8 @@ import { shape, func } from 'prop-types';
 
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-import { LOGIN, SIGNUP } from '../../../services/mutations/user';
-import { saveUserData } from '../../../helpers/auth';
+import { LOGIN, SIGNUP } from '../../services/mutations/user';
+import { login } from '../../services/auth';
 import { Container } from './styles';
 
 class Login extends Component {
@@ -15,7 +15,7 @@ class Login extends Component {
   };
 
   state = {
-    login: true, // switch between Login and SignUp
+    isLoginForm: true, // switch between Login and SignUp
     loading: false,
     email: '',
     password: '',
@@ -24,20 +24,20 @@ class Login extends Component {
   };
 
   confirm = (data) => {
-    const authData = this.state.login ? data.login : data.signup;
+    const authData = this.state.isLoginForm ? data.login : data.signup;
 
-    saveUserData(authData);
+    login(authData);
     this.props.history.push('/');
   };
 
   handleSubmit = async (e, mutation) => {
     e.preventDefault();
     const {
-      email, password, name, login, loading,
+      email, password, name, isLoginForm, loading,
     } = this.state;
 
     if (!email && !password) return;
-    if (!name && !login) return;
+    if (!name && !isLoginForm) return;
 
     if (loading) return;
 
@@ -60,16 +60,16 @@ class Login extends Component {
 
   render() {
     const {
-      login, email, password, name, error, loading,
+      isLoginForm, email, password, name, error, loading,
     } = this.state;
     return (
       <Container>
         <form onSubmit={this.handleSubmit} method="post">
-          <span className="title">{login ? 'Entrar' : 'Criar Conta'}</span>
+          <span className="title">{isLoginForm ? 'Entrar' : 'Criar Conta'}</span>
           {!!error && <span className="error">{error}</span>}
           {loading && <span>Carregando...</span>}
           <div className="input-group">
-            {!login && (
+            {!isLoginForm && (
               <label htmlFor="name">
                 Nome
                 <input
@@ -104,19 +104,22 @@ class Login extends Component {
                 placeholder="Digite sua senha"
               />
             </label>
-            <Mutation mutation={login ? LOGIN : SIGNUP} onCompleted={data => this.confirm(data)}>
+            <Mutation
+              mutation={isLoginForm ? LOGIN : SIGNUP}
+              onCompleted={data => this.confirm(data)}
+            >
               {mutation => (
                 <button type="submit" onClick={e => this.handleSubmit(e, mutation)}>
-                  {login ? 'Entrar' : 'Criar'}
+                  {isLoginForm ? 'Entrar' : 'Criar'}
                 </button>
               )}
             </Mutation>
             <button
               className="secundary"
               type="button"
-              onClick={() => this.setState({ login: !login, error: '', password: '' })}
+              onClick={() => this.setState({ isLoginForm: !isLoginForm, error: '', password: '' })}
             >
-              {login ? 'Criar Conta' : 'Voltar ao login'}
+              {isLoginForm ? 'Criar Conta' : 'Voltar ao login'}
             </button>
           </div>
         </form>

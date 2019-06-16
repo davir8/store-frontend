@@ -6,7 +6,7 @@ import { Mutation } from 'react-apollo';
 import { CREATE_PRODUCT } from '../../services/mutations/product';
 import { GET_PRODUCTS } from '../../services/queries/product';
 
-import { getUser } from '../../helpers/auth';
+import { getUser } from '../../services/auth';
 
 import { Container } from './styles';
 import Header from '../../components/Header';
