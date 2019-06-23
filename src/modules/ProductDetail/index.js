@@ -8,7 +8,7 @@ import { GET_PRODUCT_BY_ID } from '../../services/queries/product';
 import 'moment/locale/pt-br';
 
 import { Container } from './styles';
-import Header from '../../components/Header';
+import Header from '../Header';
 
 const ProductDetail = ({ match }) => {
   const { id } = match.params;

@@ -3,10 +3,10 @@ import { string, node } from 'prop-types';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Main from './pages/main';
-import ProductDetail from './pages/productDetail';
-import ProductCreate from './pages/productCreate';
-import Login from './pages/login/index';
+import Main from './modules/Main';
+import ProductDetail from './modules/ProductDetail';
+import ProductCreate from './modules/ProductCreate';
+import Login from './modules/Login';
 
 import { isAuthenticated } from './services/auth';
 

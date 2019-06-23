@@ -9,7 +9,7 @@ import { GET_PRODUCTS } from '../../services/queries/product';
 import { getUser } from '../../services/auth';
 
 import { Container } from './styles';
-import Header from '../../components/Header';
+import Header from '../Header';
 
 export default class ProductCreate extends Component {
   static propTypes = {

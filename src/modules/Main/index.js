@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import { debounce } from 'lodash';
 import { GET_PRODUCTS } from '../../services/queries/product';
 
-import Header from '../../components/Header';
+import Header from '../Header';
 import { Container } from './styles';
 
 class Main extends Component {

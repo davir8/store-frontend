@@ -5,7 +5,7 @@ import client from './services/apollo';
 
 import Routes from './routes';
 
-import GlobalStyle from './styles/global';
+import GlobalStyle from './common/utils';
 
 const App = () => (
   <BrowserRouter>
