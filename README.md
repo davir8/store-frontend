@@ -30,4 +30,4 @@ if all went well, the project will be available at: http://localhost:3000/ `
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
